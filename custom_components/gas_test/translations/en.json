@@ -1,0 +1,10 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Gas Test",
+        "description": "Click Submit to install the Gas Test statistics integration."
+      }
+    }
+  }
+}

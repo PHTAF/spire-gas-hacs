@@ -1,0 +1,11 @@
+{
+  "domain": "gas_test",
+  "name": "Gas Test",
+  "version": "0.1.1",
+  "documentation": "",
+  "requirements": [],
+  "dependencies": ["recorder"],
+  "codeowners": [],
+  "config_flow": true,
+  "iot_class": "local_push"
+}
