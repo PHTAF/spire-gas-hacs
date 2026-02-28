@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Spire Gas",
+        "description": "Connect to Spire MyAccount and import daily gas usage.",
+        "data": {
+          "username": "Username / Email",
+          "password": "Password",
+          "account_id": "Account ID",
+          "sa_id": "Service Agreement ID (saId / sald)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid credentials",
+      "cannot_connect": "Could not connect to Spire",
+      "unknown": "Unexpected error"
+    }
+  }
+}
