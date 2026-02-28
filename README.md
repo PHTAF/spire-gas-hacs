@@ -1,27 +1,45 @@
 # Spire Gas — Home Assistant Integration
 
+![Spire Gas Logo](custom_components/spire_gas/icon.png)
+
 A custom Home Assistant integration that fetches daily gas usage from
 [Spire Energy](https://www.spireenergy.com) and displays it in the
 **Energy dashboard** as a gas consumption statistic.
 
 ## Features
 
-- Imports full daily usage history from the Spire API
+- Imports full daily usage history available from the Spire API
 - Displays in the HA Energy dashboard in **CCF**
 - Refreshes automatically every 6 hours to pick up new readings
 - No entities or sensors — just a clean statistic in the Energy dashboard
 
+## Important: Data Availability
+
+Spire typically publishes usage data **one month behind**. This means the
+Energy dashboard will show your most recently completed month, not your
+current usage. This is a limitation of how Spire makes data available and
+is not something this integration can work around.
+
+The amount of historical data available will vary by account. This integration
+imports whatever Spire provides — gaps or missing periods in the data reflect
+what is available from Spire, not a bug in the integration.
+
 ## Requirements
 
 - Home Assistant 2024.1 or newer
-- A Spire Energy account with online access
-- Your **Account ID** and **SA ID** (Service Account ID) from your Spire account
+- A Spire Energy account with online access at
+  [myaccount.spireenergy.com](https://myaccount.spireenergy.com)
+- Your **Account ID** and **SA ID** (Service Account ID)
 
 ### Finding your Account ID and SA ID
 
-Log in to [myaccount.spireenergy.com](https://myaccount.spireenergy.com). Your
-Account ID and SA ID are visible in the URL when viewing your usage history, or
-on your account overview page.
+Your Account ID is visible on your Spire account overview page after logging in.
+
+Your SA ID is not directly visible in the Spire web interface. The easiest way
+to find it is to log in to [myaccount.spireenergy.com](https://myaccount.spireenergy.com),
+open your browser's developer tools (F12), go to the **Network** tab, navigate
+to your usage history page, and look for a request containing `daily-usage-history`.
+The SA ID will appear as the `sald` parameter in the request URL.
 
 ## Installation via HACS
 
@@ -47,7 +65,7 @@ on your account overview page.
    - **Username** — your Spire online account email
    - **Password** — your Spire online account password
    - **Account ID** — your Spire account number
-   - **SA ID** — your service account ID
+   - **SA ID** — your service account ID (see above for how to find this)
 4. Click **Submit**
 
 ## Adding to the Energy Dashboard
@@ -57,16 +75,14 @@ on your account overview page.
 3. Search for **Spire Gas Usage** and select it
 4. Click **Save**
 
-Historical data going back up to 2 years will populate automatically.
+Historical data will populate automatically based on what Spire makes available
+for your account.
 
-## Notes
+## Reinstalling
 
-- Spire's API only returns January and December for the oldest available year.
-  This causes a visible gap in historical data for that year — this is a
-  limitation of the Spire API, not a bug in this integration.
-- Statistics are written to the HA recorder database. If you uninstall and
-  reinstall, delete the `spire_gas:usage_*` statistic from
-  **Developer Tools → Statistics** first so the full history reimports cleanly.
+If you uninstall and reinstall the integration, delete the `spire_gas:usage_*`
+statistic from **Developer Tools → Statistics** first. This ensures the full
+history reimports cleanly rather than being skipped.
 
 ## Contributing
 
