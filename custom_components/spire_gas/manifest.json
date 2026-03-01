@@ -1,7 +1,7 @@
 {
   "domain": "spire_gas",
   "name": "Spire Gas",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "documentation": "https://github.com/PHTAF/spire-gas-ha",
   "requirements": [],
   "dependencies": [
