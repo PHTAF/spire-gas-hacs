@@ -26,7 +26,7 @@ what is available from Spire, not a bug in the integration.
 
 ## Requirements
 
-- Home Assistant 2024.1 or newer
+- Home Assistant 2025.1.0 or newer
 - A Spire Energy account with online access at
   [myaccount.spireenergy.com](https://myaccount.spireenergy.com)
 - Your **Account ID** and **SA ID** (Service Account ID)
@@ -62,10 +62,14 @@ The SA ID will appear as the `sald` parameter in the request URL.
 1. Go to **Settings → Integrations → Add Integration**
 2. Search for **Spire Gas**
 3. Enter your Spire credentials:
-   - **Username** — your Spire online account email
-   - **Password** — your Spire online account password
-   - **Account ID** — your Spire account number
-   - **SA ID** — your service account ID (see above for how to find this)
+
+| Field | Description |
+|-------|-------------|
+| **Username / Email** | The email address you use to log in to myaccount.spireenergy.com |
+| **Password** | Your Spire online account password |
+| **Account ID** | Your Spire account number, visible on your account overview page |
+| **SA ID** | Your Service Account ID — see above for how to find this |
+
 4. Click **Submit**
 
 ## Adding to the Energy Dashboard
@@ -78,11 +82,24 @@ The SA ID will appear as the `sald` parameter in the request URL.
 Historical data will populate automatically based on what Spire makes available
 for your account.
 
-## Reinstalling
+## Removal
 
-If you uninstall and reinstall the integration, delete the `spire_gas:usage_*`
-statistic from **Developer Tools → Statistics** first. This ensures the full
-history reimports cleanly rather than being skipped.
+1. Go to **Settings → Energy** and remove **Spire Gas Usage** from gas consumption sources
+2. Go to **Settings → Integrations → Spire Gas → (three dots) → Delete**
+3. Go to **Developer Tools → Statistics**, search for `spire_gas` and delete the statistic
+4. Restart Home Assistant
+
+> **Note:** If you reinstall the integration without deleting the statistic first,
+> the integration will skip the historical import since it will see existing data.
+> Always delete the statistic before reinstalling if you want a clean reimport.
+
+## Troubleshooting
+
+- **No data appearing** — check **Settings → System → Logs** and filter for `spire_gas`
+- **Authentication error** — your credentials may have changed. The integration will
+  prompt you to re-authenticate via the Integrations page
+- **Data stops updating** — try reloading the integration from
+  **Settings → Integrations → Spire Gas → (three dots) → Reload**
 
 ## Contributing
 
