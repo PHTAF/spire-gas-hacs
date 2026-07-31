@@ -1,6 +1,5 @@
 {
   "name": "Spire Energy",
-  "description": "Home Assistant integration for Spire Energy gas usage statistics",
   "render_readme": true,
   "homeassistant": "2025.1.0"
 }
